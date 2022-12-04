@@ -1,15 +1,15 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 console.log(galleryItems);
 
-const galleryRef = document.querySelector('.gallery');
+const galleryRef = document.querySelector(".gallery");
 
 galleryRef.insertAdjacentHTML(
-  'beforeend',
+  "beforeend",
   galleryItems
     .map(
-      galleryItem =>
+      (galleryItem) =>
         `<div class="gallery__item">
         <a clss="gallery__link" href="${galleryItem.original}">
         <img class="gallery__image"
@@ -17,21 +17,21 @@ galleryRef.insertAdjacentHTML(
         data-source="${galleryItem.original}"
         alt= "${galleryItem.description}"></a></div>`
     )
-    .join('')
+    .join("")
 );
 
-galleryRef.addEventListener('click', activateOriginalImage);
+galleryRef.addEventListener("click", activateOriginalImage);
 
 function activateOriginalImage(event) {
   event.preventDefault();
 
-  console.log('activateOriginalImage -> target', event.target);
-  console.log('activateOriginalImage -> currentTarget', event.currentTarget);
+  console.log("activateOriginalImage -> target", event.target);
+  console.log("activateOriginalImage -> currentTarget", event.currentTarget);
 
   console.log(event);
   console.log(event.target.nodeName);
 
-  if (event.target.nodeName !== 'IMG') {
+  if (event.target.nodeName !== "IMG") {
     return;
   }
 
@@ -40,13 +40,14 @@ function activateOriginalImage(event) {
   console.log(event.target.dataset);
   console.log(event.target.dataset.source);
 
-  const instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
+  const instance = basicLightbox.create(
+    `<img src="${event.target.dataset.source}">`
+  );
   instance.show();
 
   // close window modally by ESC
 
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') instance.close();
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") instance.close();
   });
 }
-
